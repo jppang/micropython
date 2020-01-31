@@ -52,6 +52,12 @@
 #define SDMMC_CLK_DISABLE() __HAL_RCC_SDMMC2_CLK_DISABLE()
 #define SDMMC_IRQn SDMMC2_IRQn
 #define SDMMC_DMA dma_SDMMC_2
+#define STATIC_AF_SDMMC_CK STATIC_AF_SDMMC2_CK
+#define STATIC_AF_SDMMC_CMD STATIC_AF_SDMMC2_CMD
+#define STATIC_AF_SDMMC_D0 STATIC_AF_SDMMC2_D0
+#define STATIC_AF_SDMMC_D1 STATIC_AF_SDMMC2_D1
+#define STATIC_AF_SDMMC_D2 STATIC_AF_SDMMC2_D2
+#define STATIC_AF_SDMMC_D3 STATIC_AF_SDMMC2_D3
 #else
 #define SDIO SDMMC1
 #define SDMMC_CLK_ENABLE() __HAL_RCC_SDMMC1_CLK_ENABLE()
@@ -86,8 +92,8 @@
 #define SDIO_HARDWARE_FLOW_CONTROL_ENABLE   SDMMC_HARDWARE_FLOW_CONTROL_ENABLE
 
 #if defined(STM32H7)
-#define GPIO_AF12_SDIO                      GPIO_AF12_SDIO1
-#define SDIO_IRQHandler                     SDMMC1_IRQHandler
+#define GPIO_AF12_SDIO                      GPIO_AF12_SDIO2
+#define SDIO_IRQHandler                     SDMMC_IRQHandler
 #define SDIO_TRANSFER_CLK_DIV               SDMMC_NSpeed_CLK_DIV
 #define SDIO_USE_GPDMA                      0
 #else
@@ -406,7 +412,7 @@ void SDIO_IRQHandler(void) {
 }
 #endif
 
-#if defined(STM32F7)
+#if defined(STM32F7) || defined(STM32H7)
 void SDMMC2_IRQHandler(void) {
     IRQ_ENTER(SDMMC2_IRQn);
     sdmmc_irq_handler();
