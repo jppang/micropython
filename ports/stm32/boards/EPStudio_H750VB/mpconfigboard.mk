@@ -14,8 +14,8 @@ else
 # When not using Mboot the ISR text goes first, then the rest after the filesystem
 LD_FILES = boards/stm32h750.ld boards/common_ifs.ld
 TEXT0_ADDR = 0x08000000
-#TEXT1_ADDR = 0x08040000
-TEXT1_ADDR = 0x90000000	# external QPSI flash W25Q32JV
+TEXT1_ADDR = 0x08040000
+#TEXT1_ADDR = 0x90000000	# external QPSI flash W25Q32JV
 endif
 
 # MicroPython settings
