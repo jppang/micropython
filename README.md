@@ -1,5 +1,11 @@
 [![Build Status](https://travis-ci.org/micropython/micropython.png?branch=master)](https://travis-ci.org/micropython/micropython) [![Coverage Status](https://coveralls.io/repos/micropython/micropython/badge.png?branch=master)](https://coveralls.io/r/micropython/micropython?branch=master)
 
+To add settings to my own boards:
+1. STM32F407VE
+2. STM32F407ZG
+3. STM32F411CE
+4. STM32H750VB
+
 The MicroPython project
 =======================
 <p align="center">
