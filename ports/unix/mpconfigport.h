@@ -82,6 +82,7 @@
 #endif
 #define MICROPY_MODULE_WEAK_LINKS   (1)
 #define MICROPY_CAN_OVERRIDE_BUILTINS (1)
+#define MICROPY_VFS_POSIX_FILE      (1)
 #define MICROPY_PY_FUNCTION_ATTRS   (1)
 #define MICROPY_PY_DESCRIPTORS      (1)
 #define MICROPY_PY_BUILTINS_STR_UNICODE (1)
@@ -190,6 +191,9 @@ extern const struct _mp_print_t mp_stderr_print;
 #define MICROPY_KBD_EXCEPTION       (1)
 #define MICROPY_ASYNC_KBD_INTR      (1)
 
+#define mp_type_fileio mp_type_vfs_posix_fileio
+#define mp_type_textio mp_type_vfs_posix_textio
+
 extern const struct _mp_obj_module_t mp_module_machine;
 extern const struct _mp_obj_module_t mp_module_os;
 extern const struct _mp_obj_module_t mp_module_uos_vfs;
@@ -280,17 +284,6 @@ void mp_unix_mark_exec(void);
 // Use MP_PLAT_ALLOC_EXEC for any executable memory allocation, including for FFI
 // (overriding libffi own implementation)
 #define MICROPY_FORCE_PLAT_ALLOC_EXEC (1)
-#endif
-
-#if MICROPY_PY_OS_DUPTERM
-#define MP_PLAT_PRINT_STRN(str, len) mp_hal_stdout_tx_strn_cooked(str, len)
-#else
-#define MP_PLAT_PRINT_STRN(str, len) do { \
-        MP_THREAD_GIL_EXIT(); \
-        ssize_t ret = write(1, str, len); \
-        MP_THREAD_GIL_ENTER(); \
-        (void)ret; \
-} while (0)
 #endif
 
 #ifdef __linux__

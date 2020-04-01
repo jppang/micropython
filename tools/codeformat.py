@@ -41,6 +41,7 @@ PATHS = [
     "lib/utils/*.[ch]",
     "mpy-cross/*.[ch]",
     "ports/*/*.[ch]",
+    "ports/windows/msvc/**/*.[ch]",
     "py/*.[ch]",
     # Python
     "drivers/**/*.py",
@@ -49,6 +50,7 @@ PATHS = [
     "ports/**/*.py",
     "py/**/*.py",
     "tools/**/*.py",
+    "tests/**/*.py",
 ]
 
 EXCLUSIONS = [
@@ -56,6 +58,10 @@ EXCLUSIONS = [
     "ports/*/build*",
     # gitignore in ports/unix ignores *.py, so also do it here.
     "ports/unix/*.py",
+    # not real python files
+    "tests/**/repl_*.py",
+    # needs careful attention before applying automatic formatting
+    "tests/basics/*.py",
 ]
 
 # Path to repo top-level dir.
