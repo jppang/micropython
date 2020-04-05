@@ -1,4 +1,4 @@
-#define MICROPY_HW_BOARD_NAME       "EPStudio_H750"
+#define MICROPY_HW_BOARD_NAME       "LittlePandaH750"
 #define MICROPY_HW_MCU_NAME         "STM32H750VB"
 
 /* 启用 THREAD */ 
@@ -23,8 +23,8 @@ void board_early_init(void);
 void board_sleep(int value);
 
 
-// The board has an 8MHz HSE, the following gives 480MHz CPU speed
-#define MICROPY_HW_CLK_PLLM (4)
+// The board has an 25MHz HSE, the following gives 480MHz CPU speed
+#define MICROPY_HW_CLK_PLLM (25)
 #define MICROPY_HW_CLK_PLLN (480)
 #define MICROPY_HW_CLK_PLLP (2)
 #define MICROPY_HW_CLK_PLLQ (4)
@@ -36,7 +36,7 @@ void board_sleep(int value);
 #define MICROPY_HW_RTC_USE_CALOUT   (1)
 
 // The USB clock is set using PLL3
-#define MICROPY_HW_CLK_PLL3M (4)
+#define MICROPY_HW_CLK_PLL3M (25)
 #define MICROPY_HW_CLK_PLL3N (120)
 #define MICROPY_HW_CLK_PLL3P (2)
 #define MICROPY_HW_CLK_PLL3Q (5)
@@ -47,15 +47,15 @@ void board_sleep(int value);
 
 #define MICROPY_HW_ENABLE_INTERNAL_FLASH_STORAGE    (0)
 
-// 32MBit external QSPI flash, to be memory mapped
-#define MICROPY_HW_QSPIFLASH_SIZE_BITS (32 * 1024 * 1024)
-#define MICROPY_HW_QSPIFLASH_SIZE_BITS_LOG2 (25)
-#define MICROPY_HW_QSPIFLASH_CS     (pin_B10)
+// 128MBit external QSPI flash, to be memory mapped
+#define MICROPY_HW_QSPIFLASH_SIZE_BITS (128 * 1024 * 1024)
+#define MICROPY_HW_QSPIFLASH_SIZE_BITS_LOG2 (27)
+#define MICROPY_HW_QSPIFLASH_CS     (pin_B6)
 #define MICROPY_HW_QSPIFLASH_SCK    (pin_B2)
-#define MICROPY_HW_QSPIFLASH_IO0    (pin_C9)
-#define MICROPY_HW_QSPIFLASH_IO1    (pin_C10)
+#define MICROPY_HW_QSPIFLASH_IO0    (pin_D11)
+#define MICROPY_HW_QSPIFLASH_IO1    (pin_D12)
 #define MICROPY_HW_QSPIFLASH_IO2    (pin_E2)
-#define MICROPY_HW_QSPIFLASH_IO3    (pin_A1)
+#define MICROPY_HW_QSPIFLASH_IO3    (pin_D13)
 // SPI flash #1, block device config
 extern const struct _mp_spiflash_config_t spiflash_config;
 extern struct _spi_bdev_t spi_bdev;
@@ -82,47 +82,46 @@ extern struct _spi_bdev_t spi_bdev;
 #define MICROPY_HW_UART6_RX         (pin_C7)
 #define MICROPY_HW_UART7_TX         (pin_E7)
 #define MICROPY_HW_UART7_RX         (pin_E8)
-#define MICROPY_HW_UART8_TX         (pin_E1)
-#define MICROPY_HW_UART8_RX         (pin_E0)
+
 
 #define MICROPY_HW_UART_REPL        PYB_UART_1
 #define MICROPY_HW_UART_REPL_BAUD   115200
 
 // I2C busses
-#define MICROPY_HW_I2C1_SCL         (pin_B6)
-#define MICROPY_HW_I2C1_SDA         (pin_B7)
-//#define MICROPY_HW_I2C2_SCL         (pin_B10)
-//#define MICROPY_HW_I2C2_SDA         (pin_B11)
-#define MICROPY_HW_I2C4_SCL         (pin_D12)
-#define MICROPY_HW_I2C4_SDA         (pin_D13)
+//#define MICROPY_HW_I2C1_SCL         (pin_B6)
+//#define MICROPY_HW_I2C1_SDA         (pin_B7)
+#define MICROPY_HW_I2C2_SCL         (pin_B10)
+#define MICROPY_HW_I2C2_SDA         (pin_B11)
+//#define MICROPY_HW_I2C4_SCL         (pin_D12)
+//#define MICROPY_HW_I2C4_SDA         (pin_D13)
 
 // SPI
 #define MICROPY_HW_SPI1_NSS         (pin_A4)
 #define MICROPY_HW_SPI1_SCK         (pin_A5)
 #define MICROPY_HW_SPI1_MISO        (pin_A6)
 #define MICROPY_HW_SPI1_MOSI        (pin_A7)
-//#define MICROPY_HW_SPI2_NSS         (pin_B12)
-//#define MICROPY_HW_SPI2_SCK         (pin_B13)
-//#define MICROPY_HW_SPI2_MISO        (pin_B14)
-//#define MICROPY_HW_SPI2_MOSI        (pin_B15)
-//#define MICROPY_HW_SPI3_NSS         (pin_B2)
-//#define MICROPY_HW_SPI3_SCK         (pin_B3)
-//#define MICROPY_HW_SPI3_MISO        (pin_B4)
-//#define MICROPY_HW_SPI3_MOSI        (pin_B5)
-#define MICROPY_HW_SPI4_NSS         (pin_E4)
-#define MICROPY_HW_SPI4_SCK         (pin_E2)
-#define MICROPY_HW_SPI4_MISO        (pin_E5)
-#define MICROPY_HW_SPI4_MOSI        (pin_E6)
+#define MICROPY_HW_SPI2_NSS         (pin_B12)
+#define MICROPY_HW_SPI2_SCK         (pin_B13)
+#define MICROPY_HW_SPI2_MISO        (pin_B14)
+#define MICROPY_HW_SPI2_MOSI        (pin_B15)
+#define MICROPY_HW_SPI3_NSS         (pin_B2)
+#define MICROPY_HW_SPI3_SCK         (pin_B3)
+#define MICROPY_HW_SPI3_MISO        (pin_B4)
+#define MICROPY_HW_SPI3_MOSI        (pin_B5)
+//#define MICROPY_HW_SPI4_NSS         (pin_E4)
+//#define MICROPY_HW_SPI4_SCK         (pin_E2)
+//#define MICROPY_HW_SPI4_MISO        (pin_E5)
+//#define MICROPY_HW_SPI4_MOSI        (pin_E6)
 
 // USRSW is pulled high. Pressing the button makes the input go low.
-#define MICROPY_HW_USRSW_PIN        (pin_C5)
+#define MICROPY_HW_USRSW_PIN        (pin_E2)
 #define MICROPY_HW_USRSW_PULL       (GPIO_PULLUP)
 #define MICROPY_HW_USRSW_EXTI_MODE  (GPIO_MODE_IT_FALLING)
 #define MICROPY_HW_USRSW_PRESSED    (0)
 
 // LEDs
-#define MICROPY_HW_LED1             (pin_C11)    // 
-#define MICROPY_HW_LED2             (pin_A15)    //
+#define MICROPY_HW_LED1             (pin_E0)    // 
+#define MICROPY_HW_LED2             (pin_E1)    //
 #define MICROPY_HW_LED_ON(pin)      (mp_hal_pin_high(pin))
 #define MICROPY_HW_LED_OFF(pin)     (mp_hal_pin_low(pin))
 
@@ -131,17 +130,23 @@ extern struct _spi_bdev_t spi_bdev;
 
 
 // FDCAN bus
-#define MICROPY_HW_CAN1_NAME  "FDCAN1"
-#define MICROPY_HW_CAN1_TX    (pin_B13)
-#define MICROPY_HW_CAN1_RX    (pin_B12)
+//#define MICROPY_HW_CAN1_NAME  "FDCAN1"
+//#define MICROPY_HW_CAN1_TX    (pin_B13)
+//#define MICROPY_HW_CAN1_RX    (pin_B12)
 
 // SD card detect switch
-#define MICROPY_HW_SDMMC2_CK                (pin_D6)
-#define MICROPY_HW_SDMMC2_CMD               (pin_D7)
-#define MICROPY_HW_SDMMC2_D0                (pin_B14)
-#define MICROPY_HW_SDMMC2_D1                (pin_B15)
-#define MICROPY_HW_SDMMC2_D2                (pin_B3)
-#define MICROPY_HW_SDMMC2_D3                (pin_B4)
+#define MICROPY_HW_SDMMC1_CK                (pin_C12)
+#define MICROPY_HW_SDMMC1_CMD               (pin_D2)
+#define MICROPY_HW_SDMMC1_D0                (pin_C8)
+#define MICROPY_HW_SDMMC1_D1                (pin_C9)
+#define MICROPY_HW_SDMMC1_D2                (pin_C10)
+#define MICROPY_HW_SDMMC1_D3                (pin_C11)
+//#define MICROPY_HW_SDMMC2_CK                (pin_D6)
+//#define MICROPY_HW_SDMMC2_CMD               (pin_D7)
+//#define MICROPY_HW_SDMMC2_D0                (pin_B14)
+//#define MICROPY_HW_SDMMC2_D1                (pin_B15)
+//#define MICROPY_HW_SDMMC2_D2                (pin_B3)
+//#define MICROPY_HW_SDMMC2_D3                (pin_B4)
 //#define MICROPY_HW_SDCARD_DETECT_PIN        (pin_D3)
 //#define MICROPY_HW_SDCARD_DETECT_PULL       (GPIO_PULLUP)
 //#define MICROPY_HW_SDCARD_DETECT_PRESENT    (GPIO_PIN_RESET)
